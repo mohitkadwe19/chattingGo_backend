@@ -7,7 +7,11 @@ const app = express();
 const socket = require("socket.io");
 require("dotenv").config();
 
-app.use(cors());
+app.use(cors(
+  {
+    origin: '*',
+  }
+));
 app.use(express.json());
 
 mongoose
@@ -30,9 +34,8 @@ const server = app.listen(process.env.PORT, () =>
 );
 const io = socket(server, {
   cors: {
-    origin: "https://chatting-go.vercel.app/",
-    credentials: true,
-  },
+    origin: '*',
+  }
 });
 
 global.onlineUsers = new Map();
